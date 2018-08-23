@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title><%= @post[:title] %></title>
+  </head>
+  <body>
+    <nav>
+      <!-- Point directly to the server -->
+      <a href="/">Posts</a>
+      <a href="/new">New Posts</a>
+    </nav>
+    <h1><%= @post[:title] %></h1>
+    <p><%= @post[:post_body] %></p>
+    <a href="/<%= @post[:id] %>/edit">Edit</a>
+  </body>
+</html>
