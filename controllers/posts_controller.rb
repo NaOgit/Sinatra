@@ -54,11 +54,28 @@ class PostsController < Sinatra::Base
   end
 
   get "/new" do
+    @title = "New post"
+
+    @post = {
+      id: "",
+      title: "",
+      post_body: ""
+    }
     erb :'posts/new'
   end
 
   post "/" do
+    puts params
+    # Assign new posts
+    new_post = {
+      id: $posts.length,
+      title: params[:title],
+      post_body: params[:post_body]
+    }
 
+    $posts.push(new_post)
+
+    redirect "/"
     "New added"
   end
 
@@ -73,6 +90,7 @@ class PostsController < Sinatra::Base
   get "/:id/edit" do
     id = params[:id].to_i
     @post = $posts[id]
+    @title = "Edit Post"
     erb :'posts/edit'
   end
 
