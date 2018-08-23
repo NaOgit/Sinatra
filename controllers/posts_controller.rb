@@ -95,13 +95,22 @@ class PostsController < Sinatra::Base
   end
 
   put "/:id" do
-    id = params[:id]
-    "Updated #{id}"
+    id = params[:id].to_i
+
+    post = $posts[id]
+
+    post[:title] = params[:title]
+    post[:post_body] = params[:post_body]
+
+    redirect '/'
   end
 
   delete "/:id" do
-    id = params[:id]
-    "Deleted #{id}"
+    id = params[:id].to_i
+    $posts.delete_at(id)
+
+    redirect "/"
+
   end
 
 

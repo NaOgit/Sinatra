@@ -9,6 +9,10 @@ require_relative './controllers/posts_controller.rb'
 # rbenv rehash => run this on bash if rackup isn't found
 # Take gem that budle installed and store it where it can be seen
 
+# Override methods
+use Rack::Reloader
+use Rack::MethodOverride
+
 # run => method of rack
 # Direct request to the correct controller
 # Control the blog posts - CRUD of the server
