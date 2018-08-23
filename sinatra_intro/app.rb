@@ -8,34 +8,37 @@ require 'sinatra/reloader' if development?
 
 # create first route
 get "/" do
-  "Welcome"
+  "Homepage"
 end
 
-get "/pokemon" do
-  "List of pokemons"
+get "/food" do
+  "List of food"
 end
 
-get "/pokemon/new" do
-  "Get new pokemon"
+get "/food/new" do
+  "Get new food"
 end
 
-post "/pokemon" do
-  "New pokemon added"
+post "/food" do
+  "New food added"
 end
 
-get "/pokemon/:id" do
+get "/food/:id" do
   id = params[:id]
-  "Show a specific pokemon #{id}"
+  "Show a specific food #{id}"
 end
 
-get "/pokemon/:id/edit" do
-  "Edit a pokemon"
+get "/food/:id/edit" do
+  id = params[:id]
+  "Edit food #{id}"
 end
 
-put "/pokemon/:id" do
-  "Updated a pokemon"
+put "/food/:id" do
+  id = params[:id]
+  "Updated food #{id}"
 end
 
-delete "/pokemon/:id" do
-  "Deleted a pokemon"
+delete "/food/:id" do
+  id = params[:id]
+  "Deleted food #{id}"
 end
