@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <!-- Inject data into the template -->
+    <title><%= @title %></title>
+  </head>
+  <body>
+    <!-- Inject navigation bar here; layout is for us to design a template later have to say it is false, otherwise the layout will get applied here-->
+    <!-- Inject partials -->
+    <%= erb(:'partials/navigation', :layout => false) %>
+    <!-- go through files and look for the layout template -->
+    <!-- things get injected in here -->
+    <!-- yield will go through the views folder in order of the directory, go back to the class PostsController -->
+    <!-- Yield acts as a place-holder -->
+    <%= yield %>
+  </body>
+</html>

@@ -23,11 +23,16 @@ class PostsController < Sinatra::Base
 
   $posts = [{
       id:0,
+      title: 'Post 0',
+      post_body: 'This is the initial post'
+    },
+    {
+      id:1,
       title: 'Post 1',
       post_body: 'This is the first post'
     },
     {
-      id:1,
+      id:2,
       title: 'Post 2',
       post_body: 'This is the second post'
     },
@@ -41,36 +46,39 @@ class PostsController < Sinatra::Base
   # Separation concerns
   get "/" do
     @title = "Blog Posts"
+    @post = $posts
+    # erb => go look for the layout field first
+    # Apply the template
     erb :'posts/index'
     # "test"
   end
 
-  get "/" do
-    "List of food"
-  end
-
   get "/new" do
-    "Get new food"
+    erb :'posts/new'
   end
 
   post "/" do
+
     "New added"
   end
 
   get "/:id" do
     id = params[:id].to_i
     @post = $posts[id]
+    # erb => go look for the layout field first
+    # Apply the template
     erb :'posts/show'
   end
 
   get "/:id/edit" do
-    @id = params[:id]
-    "Edit #{id}"
+    id = params[:id].to_i
+    @post = $posts[id]
+    erb :'posts/edit'
   end
 
   put "/:id" do
     id = params[:id]
-    "Updated food #{id}"
+    "Updated #{id}"
   end
 
   delete "/:id" do

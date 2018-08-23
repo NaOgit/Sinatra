@@ -1,17 +1,8 @@
-<!-- can do ruby in this HTML -->
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <!-- Inject data into the template -->
-    <title><%= @title %></title>
-  </head>
-  <body>
-    <nav>
-      <!-- Point directly to the server -->
-      <a href="/">Posts</a>
-      <a href="/food/new">New Posts</a>
-    </nav>
     <h1>Welcome to the homepage</h1>
-  </body>
-</html>
+    <!-- ERB evaluate -->
+    <% @post.each do |post| %>
+    <div>
+      <h3><a href="<%= post[:id] %>"><%= post[:title] %></a></h3>
+      <p><%= post[:post_body] %></p>
+    </div>
+    <% end %>
