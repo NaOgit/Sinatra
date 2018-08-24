@@ -48,42 +48,47 @@ class PostsController < Sinatra::Base
   # Method from model can run here
   get "/" do
     @title = "Blog Posts"
-    @post = $posts
-    # erb => go look for the layout field first
-    # Apply the template
+    @post = Post.all
+    # @post = $posts
+    # # erb => go look for the layout field first
+    # # Apply the template
     erb :'posts/index'
-    # "test"
+
+
   end
 
   get "/new" do
     @title = "New post"
+    @post = Post.new
 
-    @post = {
-      id: "",
-      title: "",
-      post_body: ""
-    }
     erb :'posts/new'
   end
 
   post "/" do
-    puts params
-    # Assign new posts
-    new_post = {
-      id: $posts.length,
-      title: params[:title],
-      post_body: params[:post_body]
-    }
+    post = Post.new
 
-    $posts.push(new_post)
+    post.title = params[:title]
+    post.post_body = params[:post_body]
 
+    post.save
+
+    # puts params
+    # # Assign new posts
+    # new_post = {
+    #   id: $posts.length,
+    #   title: params[:title],
+    #   post_body: params[:post_body]
+    # }
+    #
+    # $posts.push(new_post)
+    #
     redirect "/"
-    "New added"
+
   end
 
   get "/:id" do
     id = params[:id].to_i
-    @post = $posts[id]
+    @post = Post.find(id)
     # erb => go look for the layout field first
     # Apply the template
     erb :'posts/show'
@@ -91,7 +96,7 @@ class PostsController < Sinatra::Base
 
   get "/:id/edit" do
     id = params[:id].to_i
-    @post = $posts[id]
+    @post = Post.find(id)
     @title = "Edit Post"
     erb :'posts/edit'
   end
@@ -99,17 +104,21 @@ class PostsController < Sinatra::Base
   put "/:id" do
     id = params[:id].to_i
 
-    post = $posts[id]
+    post = Post.find(id)
 
-    post[:title] = params[:title]
-    post[:post_body] = params[:post_body]
+    post.title = params[:title]
+    post.post_body = params[:post_body]
+
+    post.save
 
     redirect '/'
   end
 
   delete "/:id" do
     id = params[:id].to_i
-    $posts.delete_at(id)
+
+    Post.destroy(id)
+
 
     redirect "/"
 
