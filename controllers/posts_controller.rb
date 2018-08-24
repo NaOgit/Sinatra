@@ -44,6 +44,8 @@ class PostsController < Sinatra::Base
   ]
 
   # Separation concerns
+  # DOn't mixed html in here
+  # Method from model can run here
   get "/" do
     @title = "Blog Posts"
     @post = $posts
